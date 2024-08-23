@@ -7,6 +7,8 @@ import CustomNavbar from '../components/common/navbar';
 import HeroHome from '../components/HeroHome';
 import PopularPicksSlider from '../components/PopularPicksSlider';
 import Tiles from '../components/Tiles';
+import InfoSection from '../components/InfoSection';
+import Footer from '../components/common/Footer';
 function App() {
   return (
     <div className="App">
@@ -15,6 +17,8 @@ function App() {
       <HeroHome/>
       <PopularPicksSlider />
       <Tiles />
+      <InfoSection />
+      <Footer />
     </div>
   );
 }

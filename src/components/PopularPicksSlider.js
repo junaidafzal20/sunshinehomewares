@@ -95,7 +95,7 @@ const ProductPrice = styled.p`
   width: 100%;
 `;
 
-const ViewAllButton = styled.button`
+export const ViewAllButton = styled.button`
   margin-top: 2rem;
   padding: 0.5rem 2rem;
   border: 1px solid #c76e6e;
