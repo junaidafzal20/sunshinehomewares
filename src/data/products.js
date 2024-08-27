@@ -47,6 +47,12 @@ const products = [
       title: 'Aromatic Essential Oils Set - 6 Bottles',
       price: 'AU$18.00',
     },
+    {
+      id: 9,
+      image: '/images/product9.jpg',
+      title: 'Decorative Wooden Lantern Candle Holder',
+      price: 'AU$12.00',
+    },
   ];
   
   export default products;

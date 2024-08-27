@@ -11,14 +11,15 @@ const TileWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f6f3ef;
-  position: relative;
   padding: 20px;
+  box-sizing: border-box;
 `;
 
 // Styled Component for ImageTile
 const ImageTile = styled.img`
-  width: 404px;
-  height: 404px;
+  width: 100%;
+  height: 100%;
+  max-width: 404px;
   object-fit: cover;
 `;
 
@@ -43,10 +44,10 @@ const CustomTile = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px;
+  padding: 0px;
   box-sizing: border-box;
   overflow: hidden;
-  position: absolute;
+  position: relative;
 
   .tile-text {
     max-width: 80%;
@@ -58,7 +59,6 @@ const CustomTile = styled.div`
     text-decoration: underline;
   }
 `;
-
 
 // Styled Component for the Mask
 const Mask = styled.div`
@@ -75,8 +75,8 @@ const Mask = styled.div`
 const Tiles = () => {
   return (
     <Container fluid>
-      <Row noGutters style={{ height: "85vh" }}>
-        <Col xs={6} className="p-0">
+      <Row noGutters className="equal-height">
+        <Col xs={12} md={6} className="p-0 d-flex">
           <TileWrapper>
             <ImageTile src="/images/rotating_candle.webp" alt="Rotating Candle" />
             <ImageDescription>
@@ -84,7 +84,7 @@ const Tiles = () => {
             </ImageDescription>
           </TileWrapper>
         </Col>
-        <Col xs={6} className="p-0">
+        <Col xs={12} md={6} className="p-0 d-flex">
           <TileWrapper>
             <CustomTile imageUrl="/images/tile2.jpg">
               <Mask />
@@ -94,8 +94,8 @@ const Tiles = () => {
         </Col>
       </Row>
 
-      <Row noGutters style={{ height: "85vh" }}>
-        <Col xs={6} className="p-0">
+      <Row noGutters className="equal-height">
+        <Col xs={12} md={6} className="p-0 d-flex">
           <TileWrapper>
             <CustomTile imageUrl="/images/tile3.webp">
               <Mask />
@@ -103,7 +103,7 @@ const Tiles = () => {
             </CustomTile>
           </TileWrapper>
         </Col>
-        <Col xs={6} className="p-0">
+        <Col xs={12} md={6} className="p-0 d-flex">
           <TileWrapper>
             <ImageTile src="/images/handmadeVase.jpg" alt="Handmade Geometric Ceramic Vase" />
             <ImageDescription>
