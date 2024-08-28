@@ -1,91 +1,40 @@
-import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import styled from 'styled-components';
+import CustomLink from './customLink';
+
+// Styled Components
+const StyledNavbar = styled(Navbar)`
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+`;
+
+const StyledContainer = styled(Container)`
+  justify-content: center;
+  padding: 0 10%;
+`;
+
+const StyledNav = styled(Nav)`
+  display: flex;
+  gap: 6rem;
+  margin: 0 auto;
+`;
+
 
 function CustomNavbar() {
-  const navbarStyle = {
-    backgroundColor: 'transparent',
-    padding: '0.5rem 1rem',
-  };
-
-  const containerStyle = {
-    padding: '0 10%',
-  };
-
-  const navStyle = {
-    display: 'flex',
-    gap: '6rem',
-  };
-
-  const navLinkStyle = {
-    fontSize: '1rem',
-    fontWeight: 300,
-    textAlign: 'center',
-    color: '#000',
-    textDecoration: 'none',
-    transition: 'color 0.3s ease',
-  };
-
-  const hoverNavLinkStyle = {
-    color: '#c76e6e',
-  };
-
   return (
-    <Navbar expand="lg" variant="light" style={navbarStyle}>
-      <Container fluid style={containerStyle}>
-        <Nav className="mx-auto" style={navStyle}>
-          <Nav.Link
-            as={NavLink}
-            to="/product"
-            style={({ isActive }) => ({
-              ...navLinkStyle,
-              color: isActive ? hoverNavLinkStyle.color : navLinkStyle.color,
-            })}
-            onMouseEnter={(e) => e.currentTarget.style.color = hoverNavLinkStyle.color}
-            onMouseLeave={(e) => e.currentTarget.style.color = navLinkStyle.color}
-          >
-            All Products
-          </Nav.Link>
-          <Nav.Link
-            as={NavLink}
-            to="/about-us"
-            style={({ isActive }) => ({
-              ...navLinkStyle,
-              color: isActive ? hoverNavLinkStyle.color : navLinkStyle.color,
-            })}
-            onMouseEnter={(e) => e.currentTarget.style.color = hoverNavLinkStyle.color}
-            onMouseLeave={(e) => e.currentTarget.style.color = navLinkStyle.color}
-          >
-            About Us
-          </Nav.Link>
-          <Nav.Link
-            as={NavLink}
-            to="/why-choose-us"
-            style={({ isActive }) => ({
-              ...navLinkStyle,
-              color: isActive ? hoverNavLinkStyle.color : navLinkStyle.color,
-            })}
-            onMouseEnter={(e) => e.currentTarget.style.color = hoverNavLinkStyle.color}
-            onMouseLeave={(e) => e.currentTarget.style.color = navLinkStyle.color}
-          >
-            Why Choose Us
-          </Nav.Link>
-          <Nav.Link
-            as={NavLink}
-            to="/contact-us"
-            style={({ isActive }) => ({
-              ...navLinkStyle,
-              color: isActive ? hoverNavLinkStyle.color : navLinkStyle.color,
-            })}
-            onMouseEnter={(e) => e.currentTarget.style.color = hoverNavLinkStyle.color}
-            onMouseLeave={(e) => e.currentTarget.style.color = navLinkStyle.color}
-          >
-            Contact Us
-          </Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+    <StyledNavbar expand="lg" variant="light">
+      <StyledContainer fluid>
+        <StyledNav>
+        <CustomLink to="/product">All Products</CustomLink>
+        <CustomLink to="/">About Us</CustomLink>
+        <CustomLink to="/">Why Choose Us</CustomLink>
+        <CustomLink to="/">Contact Us</CustomLink>
+        </StyledNav>
+      </StyledContainer>
+    </StyledNavbar>
   );
 }
 
 export default CustomNavbar;
+
