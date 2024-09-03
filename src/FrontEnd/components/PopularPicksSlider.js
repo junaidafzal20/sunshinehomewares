@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import products from '../data/products';
+import products from '../../data/products';
 
 // Styled components
 const Section = styled.section`

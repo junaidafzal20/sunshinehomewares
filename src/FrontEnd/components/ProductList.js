@@ -3,7 +3,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import ProductCard from './ProductCard';
-import products from '../data/products';
+import products from '../../data/products';
 
 const StyledRow = styled(Row)`
   margin-top: 20px;
@@ -14,7 +14,7 @@ const ProductList = () => {
     <StyledRow>
       {products.map(product => (
         <Col key={product.id} md={4}>
-          <ProductCard product={product} />
+          <ProductCard product={product} test={'test'} />
         </Col>
       ))}
     </StyledRow>

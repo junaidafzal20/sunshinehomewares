@@ -1,3 +1,4 @@
+// navbar.js
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -7,6 +8,9 @@ import CustomLink from './customLink';
 const StyledNavbar = styled(Navbar)`
   background-color: transparent;
   padding: 0.5rem 1rem;
+  @media (max-width: 992px) {
+    display: none;
+  }
 `;
 
 const StyledContainer = styled(Container)`
@@ -20,16 +24,15 @@ const StyledNav = styled(Nav)`
   margin: 0 auto;
 `;
 
-
 function CustomNavbar() {
   return (
     <StyledNavbar expand="lg" variant="light">
       <StyledContainer fluid>
         <StyledNav>
-        <CustomLink to="/product">All Products</CustomLink>
-        <CustomLink to="/">About Us</CustomLink>
-        <CustomLink to="/">Why Choose Us</CustomLink>
-        <CustomLink to="/">Contact Us</CustomLink>
+          <CustomLink to="/product">All Products</CustomLink>
+          <CustomLink to="/">About Us</CustomLink>
+          <CustomLink to="/">Why Choose Us</CustomLink>
+          <CustomLink to="/">Contact Us</CustomLink>
         </StyledNav>
       </StyledContainer>
     </StyledNavbar>
@@ -37,4 +40,3 @@ function CustomNavbar() {
 }
 
 export default CustomNavbar;
-
