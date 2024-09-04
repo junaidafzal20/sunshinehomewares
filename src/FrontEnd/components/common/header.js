@@ -11,6 +11,8 @@ import {
 import { BsSearch, BsPerson, BsList, BsX } from "react-icons/bs";
 import styled from "styled-components";
 import CustomLink from "./customLink";
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Styled Components
 const StyledNavbar = styled(Navbar)`
@@ -166,6 +168,16 @@ const SearchBar = styled.div`
 
 function Header() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const totalCount = useSelector((state) => state.cart.totalCount);
+  const navigate = useNavigate();
+
+  const handleNavigateToCart = () => {
+    navigate('/cart');
+  };
+
+  const handleNavigateToLogin = () => {
+    navigate('/login');
+  };
 
   return (
     <>
@@ -203,11 +215,13 @@ function Header() {
           {/* Right Section: Log In and Cart */}
           <Navbar.Text className="d-none d-lg-block">
             <ButtonGroup>
-              <StyledButton variant="link">
+              <StyledButton variant="link" onClick={handleNavigateToLogin}>
                 <PersonIcon />
                 Log In
               </StyledButton>
-              <StyledButton variant="link">Cart (0)</StyledButton>
+              <StyledButton variant="link" onClick={handleNavigateToCart}>
+                Cart ({totalCount})
+              </StyledButton>
             </ButtonGroup>
           </Navbar.Text>
 
@@ -228,10 +242,10 @@ function Header() {
                   <OffcanvasLink to="/">Why Choose Us</OffcanvasLink>
                   <OffcanvasLink to="/">Contact Us</OffcanvasLink>
                 </OffcanvasNav>
-                <CenteredButton variant="link" className="d-lg-none">
-                  Cart(0)
+                <CenteredButton variant="link" className="d-lg-none" onClick={handleNavigateToCart}>
+                  Cart ({totalCount})
                 </CenteredButton>
-                <CenteredButton variant="link" className="d-lg-none">
+                <CenteredButton variant="link" className="d-lg-none" onClick={handleNavigateToLogin}>
                   <BsPerson style={{ marginRight: "10px" }} />
                   Log In
                 </CenteredButton>

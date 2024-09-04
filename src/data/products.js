@@ -6,6 +6,7 @@ const products = [
     sku: '0166',
     price: 'AU$10.50',
     sizes: ['Medium', 'Large'],
+    selectedSize: 'Medium',  // Default to the first size
     info: '1pc Rustic Wooden Candle Tray Holder - Round Decorative Centerpiece for Farmhouse Table, Small Pillar Tea Light Holder for Christmas, Wedding, Halloween Home Decor, Rustic Wood Accents, Farmhouse Chic, Tabletop Decor'
   },
   {
@@ -15,6 +16,7 @@ const products = [
     sku: '0175',
     price: 'AU$6.00',
     sizes: ['Small', 'Medium'],
+    selectedSize: 'Small',  // Default to the first size
     info: 'Nordic Style Simple Decorative Ceramic Vase Set for Floral Arranging - Perfect for Modern Home Decor, Minimalist Design, Ideal for Living Room or Bedroom'
   },
   {
@@ -24,6 +26,7 @@ const products = [
     sku: '0188',
     price: 'AU$9.00',
     sizes: ['Medium', 'Large'],
+    selectedSize: 'Medium',  // Default to the first size
     info: 'Elegant Ceramic Vase Set for Floral Arranging - Timeless Design, Ideal for Home Decoration, Perfect for Centerpieces, Weddings, and Special Occasions'
   },
   {
@@ -33,6 +36,7 @@ const products = [
     sku: '0192',
     price: 'AU$13.00',
     sizes: ['Medium', 'Large'],
+    selectedSize: 'Medium',  // Default to the first size
     info: '2-Pack Soft & Cozy Faux Lamb Wool Throw Pillow Covers - Perfect for Sofa, Bed, or Chair, Warm and Comfortable, Easy to Clean, Decorative Home Accent'
   },
   {
@@ -42,6 +46,7 @@ const products = [
     sku: '0200',
     price: 'AU$15.00',
     sizes: ['One Size'],
+    selectedSize: 'One Size',  // Default to the only available size
     info: 'Handmade Macrame Wall Hanging - Boho Chic Decor, Perfect for Living Room, Bedroom, or Nursery, Adds a Natural Touch to Your Space'
   },
   {
@@ -51,6 +56,7 @@ const products = [
     sku: '0213',
     price: 'AU$8.50',
     sizes: ['One Size'],
+    selectedSize: 'One Size',  // Default to the only available size
     info: 'Set of 4 Eco-Friendly Bamboo Cutlery - Reusable and Sustainable, Ideal for Picnic, Travel, or Everyday Use, Includes Fork, Spoon, Knife, and Straw'
   },
   {
@@ -60,6 +66,7 @@ const products = [
     sku: '0224',
     price: 'AU$22.00',
     sizes: ['One Size'],
+    selectedSize: 'One Size',  // Default to the only available size
     info: 'Vintage Wooden Wall Clock - Classic Design, Perfect for Living Room, Kitchen, or Office, Silent Non-Ticking, Easy to Read, Battery Operated'
   },
   {
@@ -69,6 +76,7 @@ const products = [
     sku: '0237',
     price: 'AU$18.00',
     sizes: ['Set of 6'],
+    selectedSize: 'Set of 6',  // Default to the only available size
     info: 'Aromatic Essential Oils Set - 6 Bottles - Ideal for Diffusers, Massage, and Aromatherapy, 100% Pure and Natural, Includes Lavender, Eucalyptus, Peppermint, and More'
   },
   {
@@ -78,6 +86,7 @@ const products = [
     sku: '0245',
     price: 'AU$12.00',
     sizes: ['Medium', 'Large'],
+    selectedSize: 'Medium',  // Default to the first size
     info: 'Decorative Wooden Lantern Candle Holder - Rustic Design, Ideal for Indoor and Outdoor Use, Perfect for Weddings, Parties, and Home Decor'
   },
 ];

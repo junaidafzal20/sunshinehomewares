@@ -1,15 +1,17 @@
-// src/components/ProductCard.js
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Button, FormControl } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../redux/cartSlice';
+import { toast } from 'react-toastify';
 
 const StyledLink = styled(Link)`
-  text-decoration: none; /* Removes underline */
-  color: inherit; /* Inherits color from the parent */
+  text-decoration: none;
+  color: inherit;
   &:hover, &:focus, &:active {
-    text-decoration: none; /* Ensures underline is removed on hover, focus, and active states */
-    color: inherit; /* Ensures color does not change on interaction */
+    text-decoration: none;
+    color: inherit;
   }
 `;
 
@@ -20,7 +22,8 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 60%; /* Ensure full height */
+  margin-bottom: 20px;
 `;
 
 const ProductImage = styled(Card.Img)`
@@ -34,18 +37,16 @@ const CardBody = styled(Card.Body)`
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-  padding: 30px;
+  padding: 20px; /* Adjust padding to fit height */
+  height: 150px; /* Set a fixed height for consistent layout */
 `;
 
 const ProductTitle = styled(Card.Title)`
-  margin-top: 10px;
   font-size: 1rem;
   font-weight: 400;
   font-size: 16px;
   line-height: 22.4px;
-  text-decoration: none solid rgba(255, 255, 255, 0.7);
   text-align: center;
-  word-spacing: 0px;
 `;
 
 const ProductPrice = styled(Card.Text)`
@@ -54,10 +55,16 @@ const ProductPrice = styled(Card.Text)`
   font-weight: lighter;
 `;
 
+const QuantityInput = styled(FormControl)`
+  width: 60px;
+  text-align: center;
+  margin: 0 auto 10px;
+`;
+
 const AddToCartButton = styled(Button)`
   height: 40px;
   width: 115.9px;
-  border: 0px solid #111111;
+  border: 0px;
   padding: 8px 16px;
   align-self: center;
   background-color: #a64f4f;
@@ -68,25 +75,50 @@ const AddToCartButton = styled(Button)`
   transition: color 0.3s ease;
   text-decoration: none;
   border-radius: 0;
+  margin-top: auto; /* Push button to bottom */
 
   &:hover {
     opacity: 0.8;
     background-color: #a64f4f;
   }
+  &:active {
+    background-color: #a64f4f !important;
+    opacity: 0.8 !important;
+  }
 `;
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (e) => {
+    const value = Math.max(1, parseInt(e.target.value, 10) || 1); // Ensure minimum quantity of 1
+    setQuantity(value);
+  };
+
+  const handleAddToCart = () => {
+    const productToAdd = { ...product, quantity }; // Include quantity in product data
+    dispatch(addItem(productToAdd)); 
+    toast.success('Item added to cart!'); 
+  };
+
   return (
-    <StyledLink to={`/product/${product.id}`}>
-      <StyledCard>
+    <StyledCard>
+      <StyledLink to={`/product/${product.id}`}>
         <ProductImage variant="top" src={product.image} />
         <CardBody>
           <ProductTitle>{product.title}</ProductTitle>
-          <ProductPrice>{product.price}</ProductPrice>
-          <AddToCartButton>Add to Cart</AddToCartButton>
         </CardBody>
-      </StyledCard>
-    </StyledLink>
+      </StyledLink>
+      <QuantityInput
+            type="number"
+            value={quantity}
+            onChange={handleQuantityChange}
+            min="1"
+          />
+          <ProductPrice>{product.price}</ProductPrice>
+      <AddToCartButton onClick={handleAddToCart}>Add to Cart</AddToCartButton>
+    </StyledCard>
   );
 };
 

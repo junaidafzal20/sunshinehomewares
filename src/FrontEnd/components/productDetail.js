@@ -1,14 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+// src/components/ProductDetail.js
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/cartSlice";
+import { toast } from "react-toastify";
 
-// Main Container with specified height and width
+// Styled Components
 const MainContainer = styled.div`
   height: fit-content;
   width: 890px;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto;
   border-radius: 10px;
-  overflow: hidden; /* Hide any overflow to keep the design clean */
-
+  overflow: hidden;
 `;
 
 const Container = styled.div`
@@ -57,7 +60,6 @@ const SKU = styled.p`
 const ProductPrice = styled.p`
   color: #c76e6e;
   font-size: 22px;
-  font-weight: bold;
   font-weight: 400;
   margin-bottom: 20px;
 `;
@@ -76,7 +78,7 @@ const SizeDropdown = styled.select`
 `;
 
 const AddToCartButton = styled.button`
-  background-color: #c76e6e;
+  background-color: #b55b5b;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -85,7 +87,7 @@ const AddToCartButton = styled.button`
   border-radius: 5px;
   margin-bottom: 20px;
   &:hover {
-    background-color: #b55b5b;
+    background-color: #c76e6e;
   }
 `;
 
@@ -101,13 +103,29 @@ const ProductDescription = styled.p`
 `;
 
 const ProductDetail = ({ product }) => {
+  const dispatch = useDispatch();
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]); // State to manage selected size
+
   if (!product) return <div>Select a product to view details</div>;
+
+  // Function to handle Add to Cart action
+  const handleAddToCart = () => {
+    const productToAdd = {
+      ...product,
+      selectedSize: selectedSize || product.sizes[0], // Ensure a size is always selected
+    };
+    dispatch(addItem(productToAdd)); // Dispatch the addItem action
+    toast.success("Item added to cart!");
+  };
 
   return (
     <MainContainer>
       <Container>
         <ProductImageContainer>
-          <ProductImage src={product.image} alt={product.title} />
+          <ProductImage
+            src={process.env.PUBLIC_URL + product.image}
+            alt={product.title}
+          />
         </ProductImageContainer>
         <ProductInfo>
           <ProductTitle>{product.title}</ProductTitle>
@@ -115,7 +133,11 @@ const ProductDetail = ({ product }) => {
           <ProductPrice>{product.price}</ProductPrice>
 
           <Label htmlFor="size">Size</Label>
-          <SizeDropdown id="size">
+          <SizeDropdown
+            id="size"
+            value={selectedSize}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          >
             {product.sizes.map((size, index) => (
               <option key={index} value={size}>
                 {size}
@@ -123,7 +145,9 @@ const ProductDetail = ({ product }) => {
             ))}
           </SizeDropdown>
 
-          <AddToCartButton>Add to Cart</AddToCartButton>
+          <AddToCartButton onClick={handleAddToCart}>
+            Add to Cart
+          </AddToCartButton>
 
           <ProductDescriptionTitle>PRODUCT INFO</ProductDescriptionTitle>
           <ProductDescription>{product.info}</ProductDescription>
