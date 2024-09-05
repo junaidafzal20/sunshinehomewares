@@ -22,7 +22,7 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 60%; /* Ensure full height */
+  height: 30%; /* Adjust height to fit content */
   margin-bottom: 20px;
 `;
 
@@ -30,15 +30,16 @@ const ProductImage = styled(Card.Img)`
   height: 300px;
   object-fit: cover;
   border-radius: 10px;
+  margin-bottom: 10px; /* Adjust spacing below the image */
 `;
 
 const CardBody = styled(Card.Body)`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   flex-grow: 1;
-  padding: 20px; /* Adjust padding to fit height */
-  height: 150px; /* Set a fixed height for consistent layout */
+  padding: 20px;
+  height: auto; /* Allow height to adjust based on content */
 `;
 
 const ProductTitle = styled(Card.Title)`
@@ -53,12 +54,53 @@ const ProductPrice = styled(Card.Text)`
   color: #c76e6e;
   font-size: 1.3rem;
   font-weight: lighter;
+  margin: 10px 0; /* Add some margin for spacing */
+`;
+
+const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1px;
+  margin-bottom: 10 px;
+`;
+
+const QuantityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Space between quantity control and price */
+`;
+
+const QuantityButton = styled.button`
+  background: #a64f4f;
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
 `;
 
 const QuantityInput = styled(FormControl)`
   width: 60px;
   text-align: center;
-  margin: 0 auto 10px;
+  margin: 0 5px; /* Add space between buttons and input */
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  outline: none;
+  
+  -moz-appearance: textfield;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const AddToCartButton = styled(Button)`
@@ -66,7 +108,6 @@ const AddToCartButton = styled(Button)`
   width: 115.9px;
   border: 0px;
   padding: 8px 16px;
-  align-self: center;
   background-color: #a64f4f;
   font-size: 1rem;
   font-weight: 300;
@@ -75,8 +116,9 @@ const AddToCartButton = styled(Button)`
   transition: color 0.3s ease;
   text-decoration: none;
   border-radius: 0;
-  margin-top: auto; /* Push button to bottom */
-
+  margin-top: 10px; /* Space above the button */
+  align-self: center;
+  
   &:hover {
     opacity: 0.8;
     background-color: #a64f4f;
@@ -96,6 +138,14 @@ const ProductCard = ({ product }) => {
     setQuantity(value);
   };
 
+  const handleQuantityIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleQuantityDecrement = () => {
+    setQuantity((prevQuantity) => Math.max(1, prevQuantity - 1));
+  };
+
   const handleAddToCart = () => {
     const productToAdd = { ...product, quantity }; // Include quantity in product data
     dispatch(addItem(productToAdd)); 
@@ -110,14 +160,20 @@ const ProductCard = ({ product }) => {
           <ProductTitle>{product.title}</ProductTitle>
         </CardBody>
       </StyledLink>
-      <QuantityInput
+      <BottomContainer>
+        <QuantityContainer>
+          <QuantityButton onClick={handleQuantityDecrement}>-</QuantityButton>
+          <QuantityInput
             type="number"
             value={quantity}
             onChange={handleQuantityChange}
             min="1"
           />
-          <ProductPrice>{product.price}</ProductPrice>
-      <AddToCartButton onClick={handleAddToCart}>Add to Cart</AddToCartButton>
+          <QuantityButton onClick={handleQuantityIncrement}>+</QuantityButton>
+        </QuantityContainer>
+        <ProductPrice>{product.price}</ProductPrice>
+        <AddToCartButton onClick={handleAddToCart}>Add to Cart</AddToCartButton>
+      </BottomContainer>
     </StyledCard>
   );
 };
