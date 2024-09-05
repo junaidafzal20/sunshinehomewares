@@ -95,7 +95,7 @@ const QuantityInput = styled(FormControl)`
   box-shadow: none;
   outline: none;
   
-  -moz-appearance: textfield;
+  appearance: textfield;
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
